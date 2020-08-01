@@ -1,6 +1,6 @@
 package io.wegetit.sau.logger;
 
-import io.wegetit.sau.manifest.ManifestRestService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -17,11 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsMapContaining.hasEntry;
 import static org.hamcrest.text.MatchesPattern.matchesPattern;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -43,17 +40,31 @@ public class HttpRequestLoggerTest {
     private FilterChain filter;
 
     @Autowired
-    private HttpRequestLoggerFilter logger;
+    private HttpRequestLogger logger;
 
-    @Test
-    public void doFilter() throws ServletException, IOException {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private ByteArrayOutputStream out;
+
+    @BeforeEach
+    private void setUp() {
+        out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         when(request.getMethod()).thenReturn("GET");
-        when(request.getRequestURL()).thenReturn(new StringBuffer("someSimleUrl"));
+        when(request.getRequestURL()).thenReturn(new StringBuffer("someSimpleUrl"));
         when(request.getQueryString()).thenReturn("value=ABC");
+    }
+
+    @Test
+    public void httpRequestHasBeenLogged() throws ServletException, IOException {
         when(response.getStatus()).thenReturn(123);
         logger.doFilter(request, response, filter);
-        assertThat(out.toString(), matchesPattern(".* GET someSimleUrl\\?value=ABC in \\d* ms. Status 123.\\r\\n"));
+        assertThat(out.toString(), matchesPattern(".*GET someSimpleUrl\\?value=ABC in \\d* ms. Status 123.\\r\\n"));
     }
+
+    @Test
+    public void httpRequestHasNotBeenLogged() throws ServletException, IOException {
+        when(response.getStatus()).thenReturn(234);
+        logger.doFilter(request, response, filter);
+        assertEquals(out.toString(), "");
+    }
+
 }
