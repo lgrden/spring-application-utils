@@ -66,6 +66,7 @@ public class MySpringBootApplication {
 
     @Primary
     @Bean
+    @Validated
     @ConfigurationProperties(prefix = "slack.test")
     public SlackHook alerting() {
         return new SlackHook();
