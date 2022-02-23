@@ -34,21 +34,6 @@ public class MySpringBootApplication {
 }
 ```
 
-## Manifest REST Endpoint
-Enabling manifest will create REST endpoint allowing to view manifest.mf content under the ```manifest.endpoint``` property. By default it serves it under ```/manifest```.
-
-Code sample:
-```java
-@SpringBootApplication
-@EnableManifestEndpoint
-public class MySpringBootApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(MySpringBootApplication.class, args);
-    }
-}
-```
-
 ## Slack Messaging 
 Enabling slack messaging will allow to send messages to particular slack hook.
 
