@@ -1,7 +1,7 @@
 # spring-application-utils @ We Get IT
 
-## Descriprion
-Useful spring application utils and tools.
+## Description
+Useful spring application utilities and tools.
 
 ## Http Request Logger
 Enabling request logger in your spring application will log all the http requests in following format:
@@ -51,6 +51,7 @@ public class MySpringBootApplication {
 
     @Primary
     @Bean
+    @Validated
     @ConfigurationProperties(prefix = "slack.test")
     public SlackHook alerting() {
         return new SlackHook();
