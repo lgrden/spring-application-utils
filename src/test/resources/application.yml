@@ -1,0 +1,8 @@
+slack:
+  test:
+    type: test
+    enabled: true
+    hook: https://hooks.slack.com/services/Test
+    channel: test-channel
+    username: test-username
+    icon_emoji: ":robot_face:"
