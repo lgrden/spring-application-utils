@@ -2,8 +2,8 @@ package io.wegetit.sau.logger;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -24,19 +24,18 @@ public class HttpRequestLogger implements Filter {
         long start = System.currentTimeMillis();
         chain.doFilter(httpRequest, httpResponse);
         long end = System.currentTimeMillis();
+
         String url = buildUrlInfo(httpRequest);
-        long time = end - start;
+        long duration = end - start;
         int status = httpResponse.getStatus();
-        if (filter.logUrl(url, time, status)) {
-            log.info("{} in {} ms. Status {}.", url, time, status);
+        if (filter.logUrl(url, duration, status)) {
+            log.info("{} in {} ms. Status {}.", url, duration, status);
         }
     }
 
-    private static String buildUrlInfo(HttpServletRequest httpRequest) {
+    public static String buildUrlInfo(HttpServletRequest httpRequest) {
         StringBuilder fullUrl = new StringBuilder();
-        fullUrl.append(httpRequest.getMethod());
-        fullUrl.append(" ");
-        fullUrl.append(httpRequest.getRequestURL());
+        fullUrl.append(httpRequest.getMethod()).append(" ").append(httpRequest.getRequestURL());
         if (!StringUtils.isEmpty(httpRequest.getQueryString())) {
             fullUrl.append('?').append(httpRequest.getQueryString());
         }
