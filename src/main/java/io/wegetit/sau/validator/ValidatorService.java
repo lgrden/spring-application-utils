@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class ValidatorService {
+public class ValidatorService implements IValidatorService {
 
     private final LocalValidatorFactoryBean validator;
 

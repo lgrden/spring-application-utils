@@ -56,6 +56,7 @@ public class ErrorHandlerService {
     public ExceptionTypeInfo getDefaultTypeInfo() {
         return DEFAULT.toInfo();
     }
+
     public List<ExceptionTypeInfo> getTypesInfo() {
         return types.values().stream().map(ExceptionType::toInfo)
             .sorted(Comparator.comparing(ExceptionTypeInfo::getCode))
