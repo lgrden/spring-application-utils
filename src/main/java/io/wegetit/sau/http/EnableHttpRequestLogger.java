@@ -1,4 +1,4 @@
-package io.wegetit.sau.logger;
+package io.wegetit.sau.http;
 
 import org.springframework.context.annotation.Import;
 

@@ -6,7 +6,7 @@
 
 	<groupId>io.wegetit</groupId>
 	<artifactId>spring-application-utils</artifactId>
-	<version>1.0.0</version>
+	<version>0.1.12</version>
 	<packaging>jar</packaging>
 	<name>spring-application-utils</name>
 	<description>Spring Application Utils</description>
@@ -46,12 +46,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-launcher</artifactId>
-			<version>1.5.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

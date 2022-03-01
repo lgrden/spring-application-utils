@@ -1,0 +1,25 @@
+package io.wegetit.sau.errorhandler;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.wegetit.sau.json.JsonLocalDateTime;
+import lombok.*;
+import org.springframework.http.HttpStatus;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder
+public class ErrorResponse {
+    private String path;
+    @JsonSerialize(using = JsonLocalDateTime.Serializer.class)
+    @JsonDeserialize(using = JsonLocalDateTime.Deserializer.class)
+    private LocalDateTime timestamp;
+    private int status;
+    private HttpStatus statusText;
+    private String code;
+    private String message;
+}
