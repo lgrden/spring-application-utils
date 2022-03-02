@@ -1,17 +1,16 @@
 package io.wegetit.sau.slack;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Arrays;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-@Service
+import java.util.Arrays;
+
 @AllArgsConstructor
 @Slf4j
 public class SlackMessageService {

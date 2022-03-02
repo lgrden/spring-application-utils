@@ -1,13 +1,13 @@
 package io.wegetit.sau.slack;
 
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@ComponentScan("io.wegetit.sau.slack")
+@Import(SlackMessagingConfiguration.class)
 public @interface EnableSlackMessaging {
 
 }

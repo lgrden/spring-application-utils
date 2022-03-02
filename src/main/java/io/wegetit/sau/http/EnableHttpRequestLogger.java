@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(EnableHttpRequestLoggerConfiguration.class)
+@Import(HttpRequestLoggerConfiguration.class)
 public @interface EnableHttpRequestLogger {
 
 }
