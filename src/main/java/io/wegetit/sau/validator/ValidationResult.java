@@ -1,19 +1,19 @@
 package io.wegetit.sau.validator;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-@ToString
 @Builder(toBuilder = true)
 public class ValidationResult {
 
-    private List<ValidationEntry> list = new ArrayList<>();
+    private List<ValidationEntry> list;
 
     public boolean hasErrors() {
         return !CollectionUtils.isEmpty(list);

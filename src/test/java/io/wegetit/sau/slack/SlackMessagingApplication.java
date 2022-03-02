@@ -6,7 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.client.RestTemplate;
 
 @EnableSlackMessaging
 @SpringBootApplication
@@ -14,11 +13,6 @@ public class SlackMessagingApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SlackMessagingApplication.class, args);
-    }
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
     }
 
     @Primary

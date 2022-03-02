@@ -8,10 +8,8 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-@ToString
 @Builder
 public class ErrorResponse {
     private String path;

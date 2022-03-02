@@ -1,14 +1,7 @@
 package io.wegetit.sau.slack;
 
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -23,10 +16,16 @@ import org.springframework.test.web.client.ExpectedCount;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
+
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
+
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {
-    SlackMessagingApplication.class
-})
+@SpringBootTest(classes = SlackMessagingApplication.class)
 @TestInstance(Lifecycle.PER_CLASS)
 public class SlackMessagingTest {
 

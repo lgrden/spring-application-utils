@@ -64,6 +64,7 @@ public class ErrorHandlerService {
     }
 
     public void registerType(ExceptionType type) {
+        log.info("Exception {} has been registered.", type.getErrorClass().getSimpleName());
         types.put(type.getErrorClass(), type);
     }
 
@@ -107,7 +108,7 @@ public class ErrorHandlerService {
                 .statusText(type.getStatus())
                 .code(type.getCode())
                 .message(message)
-                .path(request.getContextPath() + request.getServletPath())
+                .path("/" + request.getContextPath() + "/" + request.getServletPath())
                 .build(), type.getStatus());
     }
 }

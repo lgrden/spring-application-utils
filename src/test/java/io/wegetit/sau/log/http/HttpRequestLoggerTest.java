@@ -24,9 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {
-    HttpRequestLoggerApplication.class
-})
+@SpringBootTest(classes = HttpRequestLoggerApplication.class)
 @TestInstance(Lifecycle.PER_CLASS)
 public class HttpRequestLoggerTest {
 

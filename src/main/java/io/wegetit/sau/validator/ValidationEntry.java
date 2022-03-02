@@ -2,10 +2,8 @@ package io.wegetit.sau.validator;
 
 import lombok.*;
 
-@Data
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-@ToString
 @Builder(toBuilder = true)
 public class ValidationEntry {
     private ValidationType type;

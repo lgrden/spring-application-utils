@@ -3,7 +3,6 @@ package io.wegetit.sau.errorhandler;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 
@@ -11,7 +10,6 @@ import java.util.function.Function;
 
 @Getter
 @AllArgsConstructor
-@ToString(of = "errorClass")
 @Builder
 public class ExceptionType {
     private Class<? extends Throwable> errorClass;
@@ -25,6 +23,7 @@ public class ExceptionType {
         code = StringUtils.substringAfter(code, "_");
         code = StringUtils.upperCase(code);
         code = StringUtils.substringBefore(code, "_EXCEPTION");
+        code = StringUtils.substringBefore(code, "_ERROR");
         return code;
     }
 
