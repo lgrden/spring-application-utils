@@ -1,6 +1,22 @@
 spring:
   main:
     allow-bean-definition-overriding: true
+  application:
+    name: test-application
+
+host:
+  ip: localhost
+
+server:
+  port: 8080
+
+system:
+  build:
+    version: 1.0.0
+    buildDate: today
+    gitCommit: ABCD
+    gitTimeStamp: 2022-01-01 12:34:27
+    gitBranch: main
 
 slack:
   test:
