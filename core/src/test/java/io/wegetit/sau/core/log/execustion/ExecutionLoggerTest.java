@@ -34,6 +34,6 @@ public class ExecutionLoggerTest {
     @Test
     public void execute() throws InterruptedException {
         executionTestService.execute();
-        assertThat(out.toString(), matchesPattern(".* ExecutionTestService.execute executed with SUCCESS in \\d* ms.\\r\\n"));
+        assertThat(out.toString().trim(), matchesPattern(".* ExecutionTestService.execute executed with SUCCESS in \\d* ms."));
     }
 }

@@ -55,7 +55,7 @@ public class HttpRequestLoggerTest {
     public void httpRequestHasBeenLogged() throws ServletException, IOException {
         when(response.getStatus()).thenReturn(123);
         logger.doFilter(request, response, filter);
-        assertThat(out.toString(), matchesPattern(".*GET someSimpleUrl\\?value=ABC in \\d* ms. Status 123.\\r\\n"));
+        assertThat(out.toString().trim(), matchesPattern(".*GET someSimpleUrl\\?value=ABC in \\d* ms. Status 123."));
     }
 
     @Test
