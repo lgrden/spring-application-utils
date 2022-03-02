@@ -1,4 +1,4 @@
-package io.wegetit.sau.http;
+package io.wegetit.sau.log.http;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

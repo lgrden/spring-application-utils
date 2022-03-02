@@ -1,4 +1,4 @@
-package io.wegetit.sau.http;
+package io.wegetit.sau.log.http;
 
 import io.wegetit.sau.utils.BaseConfiguration;
 import lombok.extern.slf4j.Slf4j;
