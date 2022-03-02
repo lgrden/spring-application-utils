@@ -51,7 +51,7 @@ public class ErrorHandlerTest {
     }
 
     @Test
-    public void handleNPE() {
+    public void handleNullPointerException() {
         ResponseEntity<ErrorResponse> response = errorHandlerService.handle(new NullPointerException("Test message"), request);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getBody().getStatus());
@@ -63,7 +63,7 @@ public class ErrorHandlerTest {
     }
 
     @Test
-    public void handleENFE() {
+    public void handleEntityNotFoundException() {
         ResponseEntity<ErrorResponse> response = errorHandlerService.handle(new EntityNotFoundException(), request);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertEquals(HttpStatus.NOT_FOUND.value(), response.getBody().getStatus());

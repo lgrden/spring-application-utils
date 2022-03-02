@@ -64,5 +64,4 @@ public class HttpRequestLoggerTest {
         logger.doFilter(request, response, filter);
         assertEquals(out.toString(), "");
     }
-
 }

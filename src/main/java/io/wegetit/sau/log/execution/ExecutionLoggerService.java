@@ -10,7 +10,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 @Slf4j
 public class ExecutionLoggerService {
 
-    @Around(value = "@annotation(ExecutionLogger)")
+    @Around(value = "@annotation(LogExecution)")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
         Object result = null;
