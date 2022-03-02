@@ -1,4 +1,4 @@
-# spring-application-utils/slack_messaging @ We Get IT
+# spring-application-utils-core/slack_messaging @ We Get IT
 
 ## Slack Messaging
 Enabling slack messaging will allow to send messages to particular slack hook.

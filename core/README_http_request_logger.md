@@ -1,4 +1,4 @@
-# spring-application-utils/http_request_logger @ We Get IT
+# spring-application-utils-core/http_request_logger @ We Get IT
 
 ## Http Request Logger
 Enabling request logger in your spring application will log all the http requests in following format:
