@@ -2,7 +2,6 @@ package io.wegetit.sau.slack;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.wegetit.sau.utils.BaseConfiguration;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -16,7 +15,6 @@ import java.lang.annotation.*;
 @Import(EnableSlackMessaging.SlackMessagingConfiguration.class)
 public @interface EnableSlackMessaging {
 
-    @Slf4j
     @Configuration
     class SlackMessagingConfiguration extends BaseConfiguration {
 
@@ -25,5 +23,4 @@ public @interface EnableSlackMessaging {
             return new SlackMessageService(restTemplate, objectMapper, slackHook);
         }
     }
-
 }

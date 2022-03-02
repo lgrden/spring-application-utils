@@ -10,6 +10,6 @@ public abstract class BaseConfiguration {
 
     @PostConstruct
     private void init() {
-        log.info("Configuration {} has been loaded.", StringUtils.substringBefore(getClass().getSimpleName(), "$"));
+        log.info("Configuration {} has been enabled.", StringUtils.substringBefore(getClass().getSimpleName(), "$"));
     }
 }

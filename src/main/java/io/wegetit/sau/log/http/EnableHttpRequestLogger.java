@@ -1,7 +1,6 @@
 package io.wegetit.sau.log.http;
 
 import io.wegetit.sau.utils.BaseConfiguration;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,6 @@ import java.lang.annotation.*;
 @Import(EnableHttpRequestLogger.HttpRequestLoggerConfiguration.class)
 public @interface EnableHttpRequestLogger {
 
-    @Slf4j
     @Configuration
     class HttpRequestLoggerConfiguration extends BaseConfiguration {
 

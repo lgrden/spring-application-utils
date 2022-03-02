@@ -3,7 +3,6 @@ package io.wegetit.sau.errorhandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.wegetit.sau.json.ObjectMapperBuilder;
 import io.wegetit.sau.utils.BaseConfiguration;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +16,6 @@ import java.lang.annotation.*;
 @Import(EnableErrorHandler.ErrorHandlerConfiguration.class)
 public @interface EnableErrorHandler {
 
-    @Slf4j
     @Configuration
     class ErrorHandlerConfiguration extends BaseConfiguration {
 
