@@ -22,7 +22,7 @@ public class SystemInfoTest {
     @Test
     public void getSystemInfo() {
         SystemInfo info = systemInfoRestService.getSystemInfo();
-        assertEquals("test-application", info.getApplicationName());
+        assertEquals("spring-application-utils-core", info.getApplicationName());
         assertEquals("localhost", info.getServerIp());
         assertEquals("8080", info.getServerPort());
         assertNotNull(info.getStartDate());

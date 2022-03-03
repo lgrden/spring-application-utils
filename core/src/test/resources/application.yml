@@ -1,12 +1,12 @@
 spring:
   main:
     allow-bean-definition-overriding: true
+    banner-mode: off
   application:
-    name: test-application
+    name: spring-application-utils-core
 
 host:
   ip: localhost
-
 server:
   port: 8080
 
