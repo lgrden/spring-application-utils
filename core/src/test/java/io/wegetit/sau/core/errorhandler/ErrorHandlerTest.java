@@ -35,7 +35,7 @@ public class ErrorHandlerTest {
 
     @BeforeEach
     private void setUp() {
-        when(request.getContextPath()).thenReturn("aaa");
+        when(request.getContextPath()).thenReturn("/aaa/");
         when(request.getServletPath()).thenReturn("bbb");
 
         errorHandlerService.registerType(ExceptionType.builder().errorClass(EntityNotFoundException.class)
