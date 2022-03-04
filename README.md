@@ -2,7 +2,7 @@
 
 ## Description
 Useful spring application utilities and tools:
- - CORE Module
+ - Core Module
     - [Error Handler](core/README_error_handler.md)
     - Logger
        - [Execution](core/README_execution_logger.md)
@@ -12,6 +12,8 @@ Useful spring application utilities and tools:
     - [Validator](core/README_validator.md)
 - Mongo Module
    - [Mongo](mongo/README_mongo.md)
+- Swagger Module
+   - [Swagger(swagger/README_swagger.md)
 
 ## System requirements
  - JDK 11+
