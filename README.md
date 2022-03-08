@@ -13,7 +13,7 @@ Useful spring application utilities and tools:
 - Mongo Module
    - [Mongo](mongo/README_mongo.md)
 - Swagger Module
-   - [Swagger(swagger/README_swagger.md)
+   - [Swagger](swagger/README_swagger.md)
 
 ## System requirements
  - JDK 11+
