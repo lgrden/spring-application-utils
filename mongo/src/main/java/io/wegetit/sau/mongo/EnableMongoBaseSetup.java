@@ -27,12 +27,12 @@ import java.util.List;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(EnableMongo.ExecutionLoggerConfiguration.class)
-public @interface EnableMongo {
+@Import(EnableMongoBaseSetup.MongoBaseSetupConfiguration.class)
+public @interface EnableMongoBaseSetup {
 
     @Slf4j
     @Configuration
-    class ExecutionLoggerConfiguration extends BaseConfiguration {
+    class MongoBaseSetupConfiguration extends BaseConfiguration {
 
         @Lazy
         @Autowired
