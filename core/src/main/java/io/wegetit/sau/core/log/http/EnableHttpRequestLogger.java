@@ -18,8 +18,8 @@ public @interface EnableHttpRequestLogger {
     class HttpRequestLoggerConfiguration extends BaseConfiguration {
 
         @Bean
-        public HttpRequestLogger httpRequestLogger(ObjectProvider<HttpRequestFilter> filter) {
-            return new HttpRequestLogger(filter.getIfAvailable(HttpRequestFilter::new));
+        public HttpRequestLogger httpRequestLogger(ObjectProvider<HttpRequestFilter> provider) {
+            return new HttpRequestLogger(getOrDefault(provider, (url, time, status) -> true));
         }
     }
 }

@@ -1,15 +1,15 @@
-package io.wegetit.sau.core.system;
+package io.wegetit.sau.swagger;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@EnableSystemInfo
+@EnableSwaggerIndexRedirect
 @SpringBootApplication
 @ComponentScan(useDefaultFilters = false)
-public class SystemInfoApplication {
+public class SwaggerIndexRedirectApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SystemInfoApplication.class, args);
+        SpringApplication.run(SwaggerIndexRedirectApplication.class, args);
     }
 }

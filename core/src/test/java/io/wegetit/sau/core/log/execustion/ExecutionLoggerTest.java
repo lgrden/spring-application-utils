@@ -1,6 +1,6 @@
 package io.wegetit.sau.core.log.execustion;
 
-import org.junit.jupiter.api.AfterEach;
+import io.wegetit.sau.core.SystemOutUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -24,24 +24,18 @@ public class ExecutionLoggerTest {
     @Autowired
     public ExecutionTestService executionTestService;
 
-    private PrintStream original;
     private ByteArrayOutputStream out;
 
     @BeforeEach
     private void setUp() {
-        original = System.out;
         out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-    }
-
-    @AfterEach
-    private void tearDown() {
-        System.setOut(original);
     }
 
     @Test
     public void execute() throws InterruptedException {
+        SystemOutUtils.setSystemOut(new PrintStream(out));
         executionTestService.execute();
+        SystemOutUtils.applyDefaultSystemOut();
         assertThat(out.toString().trim(), matchesPattern(".* ExecutionTestService.execute executed with SUCCESS in \\d* ms."));
     }
 }
