@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/system/info")
+@RequestMapping("/system-info")
 @Slf4j
 public class SystemInfoRestService {
 

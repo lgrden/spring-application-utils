@@ -1,5 +1,6 @@
 package io.wegetit.sau.core.log.http;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -40,15 +41,22 @@ public class HttpRequestLoggerTest {
     @Autowired
     private HttpRequestLogger logger;
 
+    private PrintStream original;
     private ByteArrayOutputStream out;
 
     @BeforeEach
     private void setUp() {
+        original = System.out;
         out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         when(request.getMethod()).thenReturn("GET");
         when(request.getRequestURL()).thenReturn(new StringBuffer("someSimpleUrl"));
         when(request.getQueryString()).thenReturn("value=ABC");
+    }
+
+    @AfterEach
+    private void tearDown() {
+        System.setOut(original);
     }
 
     @Test
