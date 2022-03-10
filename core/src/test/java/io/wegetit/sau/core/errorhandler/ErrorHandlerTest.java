@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -37,9 +38,6 @@ public class ErrorHandlerTest {
     private void setUp() {
         when(request.getContextPath()).thenReturn("/aaa/");
         when(request.getServletPath()).thenReturn("bbb");
-
-        errorHandlerService.registerType(ExceptionType.builder().errorClass(EntityNotFoundException.class)
-            .status(HttpStatus.NOT_FOUND).evalMessage(p -> "MSG: " + p.getMessage()).build());
     }
 
     @Test

@@ -16,7 +16,7 @@ public class SlackMessagingApplication {
     @Primary
     @Bean
     @Validated
-    @ConfigurationProperties(prefix = "slack.test")
+    @ConfigurationProperties(prefix = "test.slack.hook")
     public SlackHook alerting() {
         return new SlackHook();
     }

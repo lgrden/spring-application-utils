@@ -1,7 +1,6 @@
 package io.wegetit.sau.core.slack;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -14,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.client.ExpectedCount;
 import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -30,17 +28,11 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 public class SlackMessagingTest {
 
     @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @Autowired
     private SlackMessageService service;
 
     @Test
     public void sendMessage() throws URISyntaxException, JsonProcessingException {
-        MockRestServiceServer mockServer = MockRestServiceServer.createServer(restTemplate);
+        MockRestServiceServer mockServer = MockRestServiceServer.createServer(service.SLACK_REST_TEMPLATE);
 
         SlackMessage message = SlackMessage.builder()
             .text("This is a slack test message")
@@ -56,7 +48,7 @@ public class SlackMessagingTest {
                 .andExpect(method(HttpMethod.POST))
                 .andRespond(withStatus(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(objectMapper.writeValueAsString(message))
+                .body(service.SLACK_OBJECT_MAPPER.writeValueAsString(message))
             );
         service.send("This is a slack test message", SlackAttachment.of("Welcome Test", "red"));
         mockServer.verify();

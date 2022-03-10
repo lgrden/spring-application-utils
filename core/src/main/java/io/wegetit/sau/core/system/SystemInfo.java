@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class SystemInfo {
 
     private String applicationName;
-    private String serverIp;
+    private String serverAddress;
     private String serverPort;
     private String startDate;
     private String version;
@@ -24,7 +24,7 @@ public class SystemInfo {
     public static SystemInfo of(SystemBuild systemBuild, Environment environment) {
         return SystemInfo.builder()
                 .applicationName(environment.getProperty("spring.application.name"))
-                .serverIp(environment.getProperty("host.ip"))
+                .serverAddress(environment.getProperty("server.address"))
                 .serverPort(environment.getProperty("server.port"))
                 .startDate(JsonLocalDateTime.DATE_TIME_FORMATTER.format(LocalDateTime.now()))
                 .version(systemBuild.getVersion())

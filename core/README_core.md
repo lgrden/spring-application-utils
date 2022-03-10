@@ -27,7 +27,8 @@ public class MySpringBootApplication {
     /**
         Optionally you can register additional exceptions.
      **/
-    private void postConstruct() {
+    @PostConstruct
+    private void init() {
         errorHandlerService.registerType(ExceptionType.builder().errorClass(EntityNotFoundException.class)
             .status(HttpStatus.NOT_FOUND).evalMessage(p -> "MSG: " + p.getMessage()).build());
     }
@@ -76,12 +77,7 @@ public class MySpringBootApplication {
     **/
     @Bean
     public HttpRequestFilter httpRequestFilter() {
-        return new HttpRequestFilter() {
-            @Override
-            public boolean logUrl(String url, long time, int status) {
-                return status == 123;
-            }
-        };
+        return (url, time, status) -> status == 123;
     }
 
     public static void main(String[] args) {
@@ -98,11 +94,6 @@ Code sample:
 @SpringBootApplication
 @EnableSlackMessaging
 public class MySpringBootApplication {
-    
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
 
     @Primary
     @Bean
@@ -136,6 +127,13 @@ Code sample:
 @EnableSystemInfo
 public class MySpringBootApplication {
 
+    @Validated
+    @Bean
+    @ConfigurationProperties(prefix = "system.build")
+    public SystemBuild systemBuild() {
+        return new SystemBuild();
+    }
+    
     public static void main(String[] args) {
         SpringApplication.run(MySpringBootApplication.class, args);
     }
