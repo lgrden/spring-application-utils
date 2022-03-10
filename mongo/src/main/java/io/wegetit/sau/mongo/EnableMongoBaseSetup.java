@@ -1,6 +1,6 @@
 package io.wegetit.sau.mongo;
 
-import io.wegetit.sau.shared.BaseConfiguration;
+import io.wegetit.sau.shared.configuration.BaseConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

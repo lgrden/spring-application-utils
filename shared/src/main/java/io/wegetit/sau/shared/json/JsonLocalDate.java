@@ -1,4 +1,4 @@
-package io.wegetit.sau.core.json;
+package io.wegetit.sau.shared.json;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;

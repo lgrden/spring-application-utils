@@ -1,6 +1,6 @@
 package io.wegetit.sau.core.system;
 
-import io.wegetit.sau.core.json.JsonLocalDateTime;
+import io.wegetit.sau.shared.json.JsonLocalDateTime;
 import lombok.*;
 import org.springframework.core.env.Environment;
 

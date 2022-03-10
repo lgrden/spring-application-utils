@@ -2,7 +2,7 @@ package io.wegetit.sau.core.errorhandler;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.wegetit.sau.core.json.JsonLocalDateTime;
+import io.wegetit.sau.shared.json.JsonLocalDateTime;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 

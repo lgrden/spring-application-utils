@@ -1,6 +1,6 @@
 package io.wegetit.sau.core.log.http;
 
-import io.wegetit.sau.shared.BaseConfiguration;
+import io.wegetit.sau.shared.configuration.BaseConfiguration;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

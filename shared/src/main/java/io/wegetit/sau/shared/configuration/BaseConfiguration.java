@@ -1,4 +1,4 @@
-package io.wegetit.sau.shared;
+package io.wegetit.sau.shared.configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -15,9 +15,7 @@ public abstract class BaseConfiguration {
     }
 
     protected <T> T getOrDefault(ObjectProvider<T> op, T t) {
-        op.ifAvailable(x -> {
-            log.info("Using defined bean {}.", x.getClass().getSimpleName());
-        });
+        op.ifAvailable(x -> log.info("Using defined bean {}.", x.getClass().getSimpleName()));
         return op.getIfAvailable(() -> {
             log.info("Default {} initialized.", t.getClass().getSimpleName());
             return t;

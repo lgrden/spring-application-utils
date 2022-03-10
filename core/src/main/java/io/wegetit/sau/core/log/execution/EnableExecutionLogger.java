@@ -1,6 +1,6 @@
 package io.wegetit.sau.core.log.execution;
 
-import io.wegetit.sau.shared.BaseConfiguration;
+import io.wegetit.sau.shared.configuration.BaseConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
