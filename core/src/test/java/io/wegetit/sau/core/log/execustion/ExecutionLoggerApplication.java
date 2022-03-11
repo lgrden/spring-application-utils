@@ -4,9 +4,11 @@ import io.wegetit.sau.core.log.execution.EnableExecutionLogger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 @EnableExecutionLogger
 @SpringBootApplication
+@ComponentScan(useDefaultFilters = false)
 public class ExecutionLoggerApplication {
 
     @Bean

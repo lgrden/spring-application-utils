@@ -1,15 +1,15 @@
-package io.wegetit.sau.core.validator;
+package io.wegetit.sau.swagger;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@EnableValidation
+@EnableSwaggerIndexRedirect
 @SpringBootApplication
 @ComponentScan(useDefaultFilters = false)
-public class ValidatorApplication {
+public class SwaggerIndexRedirectApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ValidatorApplication.class, args);
+        SpringApplication.run(SwaggerIndexRedirectApplication.class, args);
     }
 }

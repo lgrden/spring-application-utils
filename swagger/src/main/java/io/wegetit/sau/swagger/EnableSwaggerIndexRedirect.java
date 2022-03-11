@@ -1,6 +1,6 @@
 package io.wegetit.sau.swagger;
 
-import io.wegetit.sau.shared.BaseConfiguration;
+import io.wegetit.sau.shared.configuration.BaseConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,16 +11,16 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(EnableSwagger.SwaggerConfiguration.class)
-public @interface EnableSwagger {
+@Import(EnableSwaggerIndexRedirect.SwaggerIndexRedirectConfiguration.class)
+public @interface EnableSwaggerIndexRedirect {
 
     @Slf4j
     @Configuration
-    class SwaggerConfiguration extends BaseConfiguration {
+    class SwaggerIndexRedirectConfiguration extends BaseConfiguration {
 
         @Bean
-        public SwaggerIndexController swaggerIndexController() {
-            return new SwaggerIndexController();
+        public SwaggerIndexRedirectController swaggerIndexController() {
+            return new SwaggerIndexRedirectController();
         }
     }
 }

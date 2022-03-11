@@ -1,5 +1,6 @@
 package io.wegetit.sau.core.log.execustion;
 
+import io.wegetit.sau.core.SystemOutUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -28,12 +29,13 @@ public class ExecutionLoggerTest {
     @BeforeEach
     private void setUp() {
         out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
     }
 
     @Test
     public void execute() throws InterruptedException {
+        SystemOutUtils.setSystemOut(new PrintStream(out));
         executionTestService.execute();
+        SystemOutUtils.applyDefaultSystemOut();
         assertThat(out.toString().trim(), matchesPattern(".* ExecutionTestService.execute executed with SUCCESS in \\d* ms."));
     }
 }

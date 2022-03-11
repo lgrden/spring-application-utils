@@ -1,9 +1,7 @@
 package io.wegetit.sau.core.errorhandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.wegetit.sau.core.json.ObjectMapperBuilder;
-import io.wegetit.sau.shared.BaseConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import io.wegetit.sau.shared.configuration.BaseConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -18,12 +16,6 @@ public @interface EnableErrorHandler {
 
     @Configuration
     class ErrorHandlerConfiguration extends BaseConfiguration {
-
-        @Bean
-        @ConditionalOnMissingBean
-        public ObjectMapper objectMapper() {
-            return ObjectMapperBuilder.build();
-        }
 
         @Bean
         public ErrorHandlerService errorHandlerService(ObjectMapper objectMapper) {

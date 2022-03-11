@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.wegetit</groupId>
 		<artifactId>spring-application-utils</artifactId>
-		<version>0.1.12</version>
+		<version>0.1.13</version>
 	</parent>
 
 	<artifactId>spring-application-utils-core</artifactId>

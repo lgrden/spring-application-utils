@@ -14,9 +14,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 @Slf4j
 public class SlackMessageService {
+    public static final RestTemplate SLACK_REST_TEMPLATE = new RestTemplate();
+    public static final ObjectMapper SLACK_OBJECT_MAPPER = new ObjectMapper();
 
-    private final RestTemplate slackRestTemplate;
-    private final ObjectMapper slackObjectMapper;
     private final SlackHook slackHook;
 
     public void send(String text, SlackAttachment... attachments) {
@@ -35,8 +35,8 @@ public class SlackMessageService {
             try {
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_JSON);
-                HttpEntity<String> request = new HttpEntity<>(slackObjectMapper.writeValueAsString(message), headers);
-                slackRestTemplate.exchange(slack.getHook(), HttpMethod.POST, request, String.class);
+                HttpEntity<String> request = new HttpEntity<>(SLACK_OBJECT_MAPPER.writeValueAsString(message), headers);
+                SLACK_REST_TEMPLATE.exchange(slack.getHook(), HttpMethod.POST, request, String.class);
                 log.info("Send {} message: {}", slack.getType(), message);
             } catch (Exception e) {
                 log.error("Problem sending {} message: {}", slack.getType(), message);

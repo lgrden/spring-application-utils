@@ -1,28 +1,26 @@
 spring:
   main:
-    allow-bean-definition-overriding: true
     banner-mode: off
   application:
     name: spring-application-utils-core
 
-host:
-  ip: localhost
 server:
+  address: localhost
   port: 8080
 
-system:
-  build:
-    version: 1.0.0
-    buildDate: today
-    gitCommit: ABCD
-    gitTimeStamp: 2022-01-01 12:34:27
-    gitBranch: main
-
-slack:
-  test:
-    type: test
-    enabled: true
-    hook: https://hooks.slack.com/services/Test
-    channel: test-channel
-    username: test-username
-    icon_emoji: ":robot_face:"
+test:
+  system:
+    build:
+      version: 1.0.0
+      buildDate: today
+      gitCommit: ABCD
+      gitTimeStamp: 2022-01-01 12:34:27
+      gitBranch: main
+  slack:
+    hook:
+      type: test
+      enabled: true
+      hook: https://hooks.slack.com/services/Test
+      channel: test-channel
+      username: test-username
+      icon_emoji: ":robot_face:"

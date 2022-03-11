@@ -1,0 +1,19 @@
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: documently
+  data:
+    mongodb:
+      database: documently-test
+      host: localhost
+      port: 27019
+      repositories:
+        enabled: true
+  mongodb:
+    embedded:
+      features: SYNC_DELAY
+      version: 2.6.10
+
+mongock:
+  change-logs-scan-package: io.wegetit.sau.mongo
