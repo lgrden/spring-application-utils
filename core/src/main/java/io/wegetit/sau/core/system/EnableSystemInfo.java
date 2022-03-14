@@ -1,5 +1,7 @@
 package io.wegetit.sau.core.system;
 
+import io.wegetit.sau.core.system.data.SystemBuild;
+import io.wegetit.sau.core.system.data.SystemInfo;
 import io.wegetit.sau.shared.configuration.BaseConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

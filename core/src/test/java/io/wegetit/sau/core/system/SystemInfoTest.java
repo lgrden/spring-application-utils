@@ -1,5 +1,6 @@
 package io.wegetit.sau.core.system;
 
+import io.wegetit.sau.core.system.data.SystemInfo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -23,13 +24,7 @@ public class SystemInfoTest {
     public void getSystemInfo() {
         SystemInfo info = systemInfoRestService.getSystemInfo();
         assertEquals("spring-application-utils-core", info.getApplicationName());
-        assertEquals("localhost", info.getServerAddress());
-        assertEquals("8080", info.getServerPort());
-        assertNotNull(info.getStartDate());
-        assertEquals("1.0.0", info.getVersion());
-        assertEquals("today", info.getBuildDate());
-        assertEquals("ABCD", info.getGitCommit());
-        assertEquals("2022-01-01 12:34:27", info.getGitTimeStamp());
-        assertEquals("main", info.getGitBranch());
+        assertNotNull(info.getConnection());
+        assertNotNull(info.getBuild());
     }
 }

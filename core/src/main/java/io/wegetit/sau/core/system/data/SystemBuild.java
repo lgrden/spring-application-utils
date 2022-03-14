@@ -1,4 +1,4 @@
-package io.wegetit.sau.core.system;
+package io.wegetit.sau.core.system.data;
 
 import lombok.Data;
 
