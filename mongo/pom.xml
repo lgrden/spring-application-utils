@@ -9,6 +9,7 @@
 		<version>0.1.13</version>
 	</parent>
 
+	<name>spring-application-utils-mongo</name>
 	<artifactId>spring-application-utils-mongo</artifactId>
 	<packaging>jar</packaging>
 

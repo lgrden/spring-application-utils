@@ -9,6 +9,7 @@
 		<version>0.1.13</version>
 	</parent>
 
+	<name>spring-application-utils-shared</name>
 	<artifactId>spring-application-utils-shared</artifactId>
 	<packaging>jar</packaging>
 

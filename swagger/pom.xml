@@ -9,6 +9,7 @@
 		<version>0.1.13</version>
 	</parent>
 
+	<name>spring-application-utils-swagger</name>
 	<artifactId>spring-application-utils-swagger</artifactId>
 	<packaging>jar</packaging>
 

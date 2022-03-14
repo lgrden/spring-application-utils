@@ -9,6 +9,7 @@
 		<version>0.1.13</version>
 	</parent>
 
+	<name>spring-application-utils-core</name>
 	<artifactId>spring-application-utils-core</artifactId>
 	<packaging>jar</packaging>
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.wegetit</groupId>
+		<artifactId>spring-application-utils</artifactId>
+		<version>0.1.13</version>
+	</parent>
+
+	<name>spring-application-utils-dependencies</name>
+	<artifactId>spring-application-utils-dependencies</artifactId>
+	<packaging>pom</packaging>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.wegetit</groupId>
+				<artifactId>spring-application-utils-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.wegetit</groupId>
+				<artifactId>spring-application-utils-mongo</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.wegetit</groupId>
+				<artifactId>spring-application-utils-swagger</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>
