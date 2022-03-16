@@ -27,6 +27,11 @@
 			</dependency>
 			<dependency>
 				<groupId>io.wegetit</groupId>
+				<artifactId>spring-application-utils-security</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.wegetit</groupId>
 				<artifactId>spring-application-utils-swagger</artifactId>
 				<version>${project.version}</version>
 			</dependency>
