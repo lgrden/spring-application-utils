@@ -5,8 +5,11 @@ spring:
     name: spring-application-utils-security
 
 security:
-  auth-token-name: xxx
   web-ignoring-ant-matchers:
-    - a
-    - b
-    - c
+    - /actuator/**
+    - /security/**
+    - /error-types
+    - /system-info
+    - /swagger-ui.html
+    - /swagger-ui/**
+    - /v3/api-docs/**

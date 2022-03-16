@@ -1,7 +1,7 @@
 package io.wegetit.sau.security;
 
-import io.wegetit.sau.security.model.SecurityAuthorizeUserRequest;
-import io.wegetit.sau.security.model.SecurityAuthorizeUserResponse;
+import io.wegetit.sau.security.model.SecurityAuthorizeRequest;
+import io.wegetit.sau.security.model.SecurityAuthorizeResponse;
 import io.wegetit.sau.security.model.SecurityInvalidateRequest;
 import io.wegetit.sau.security.model.SecurityInvalidateResponse;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ public class SecurityAuthenticationRestService {
 
     // no permission, accessible for everyone
     @PostMapping("/authorize")
-    public SecurityAuthorizeUserResponse authorize(@Valid @RequestBody SecurityAuthorizeUserRequest request) {
+    public SecurityAuthorizeResponse authorize(@Valid @RequestBody SecurityAuthorizeRequest request) {
         return securityAuthenticationService.authorize(request);
     }
 

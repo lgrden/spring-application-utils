@@ -1,7 +1,7 @@
 package io.wegetit.sau.security;
 
-import io.wegetit.sau.security.model.SecurityAuthorizeUserRequest;
-import io.wegetit.sau.security.model.SecurityAuthorizeUserResponse;
+import io.wegetit.sau.security.model.SecurityAuthorizeRequest;
+import io.wegetit.sau.security.model.SecurityAuthorizeResponse;
 import io.wegetit.sau.security.model.SecurityInvalidateRequest;
 import io.wegetit.sau.security.model.SecurityInvalidateResponse;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SecurityAuthenticationService {
 
     private static final int DEFAULT_EXPIRES = 600;
-    private static final ConcurrentHashMap<String, SecurityAuthorizeUserResponse> TOKENS = new ConcurrentHashMap();
+    private static final ConcurrentHashMap<String, SecurityAuthorizeResponse> TOKENS = new ConcurrentHashMap();
 
     private final SecurityTokenFacade securityTokenFacade;
 
@@ -35,11 +35,11 @@ public class SecurityAuthenticationService {
         });
     }
 
-    public SecurityAuthorizeUserResponse authorize(@Valid @RequestBody SecurityAuthorizeUserRequest request) {
+    public SecurityAuthorizeResponse authorize(@Valid @RequestBody SecurityAuthorizeRequest request) {
         if (securityTokenFacade.authenticate(request)) {
             String token = UUID.randomUUID().toString();
             log.info("Token {} for user {} has created.", token, request.getLogin());
-            TOKENS.put(token, SecurityAuthorizeUserResponse.builder()
+            TOKENS.put(token, SecurityAuthorizeResponse.builder()
                     .login(request.getLogin())
                     .token(token)
                     .expires(LocalDateTime.now().plusSeconds(DEFAULT_EXPIRES))
@@ -50,7 +50,7 @@ public class SecurityAuthenticationService {
     }
 
     public SecurityInvalidateResponse invalidate(@Valid @RequestBody SecurityInvalidateRequest request) {
-        SecurityAuthorizeUserResponse response = TOKENS.get(request.getToken());
+        SecurityAuthorizeResponse response = TOKENS.get(request.getToken());
         if (response != null) {
             TOKENS.remove(request.getToken());
             log.info("Token {} for user {} has been invalidated.", request.getToken(), response.getLogin());
@@ -59,7 +59,7 @@ public class SecurityAuthenticationService {
     }
 
     public Authentication getAuthentication(String token) {
-        SecurityAuthorizeUserResponse response = TOKENS.get(token);
+        SecurityAuthorizeResponse response = TOKENS.get(token);
         if (response != null) {
             TOKENS.put(token, response.toBuilder().expires(LocalDateTime.now().plusSeconds(DEFAULT_EXPIRES)).build());
             return securityTokenFacade.getAuthenticationToken(response);

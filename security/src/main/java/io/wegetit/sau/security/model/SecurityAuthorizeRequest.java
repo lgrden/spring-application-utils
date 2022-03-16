@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class SecurityAuthorizeUserRequest {
+public class SecurityAuthorizeRequest {
 	@NotNull
 	private String login;
 	@NotNull

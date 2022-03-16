@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class SecurityAuthorizeUserResponse {
+public class SecurityAuthorizeResponse {
 	private String login;
 	private String token;
 	@JsonSerialize(using = JsonLocalDateTime.Serializer.class)

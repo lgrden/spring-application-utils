@@ -1,6 +1,5 @@
 security:
   web-ignoring-ant-matchers:
-    - /
     - /actuator/**
     - /security/**
     - /error-types

@@ -1,12 +1,12 @@
 package io.wegetit.sau.security;
 
-import io.wegetit.sau.security.model.SecurityAuthorizeUserRequest;
-import io.wegetit.sau.security.model.SecurityAuthorizeUserResponse;
+import io.wegetit.sau.security.model.SecurityAuthorizeRequest;
+import io.wegetit.sau.security.model.SecurityAuthorizeResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 public interface SecurityTokenFacade {
 
-    boolean authenticate(SecurityAuthorizeUserRequest request);
+    boolean authenticate(SecurityAuthorizeRequest request);
 
-    UsernamePasswordAuthenticationToken getAuthenticationToken(SecurityAuthorizeUserResponse response);
+    UsernamePasswordAuthenticationToken getAuthenticationToken(SecurityAuthorizeResponse response);
 }
