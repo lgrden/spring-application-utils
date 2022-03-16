@@ -8,5 +8,5 @@ public interface SecurityTokenFacade {
 
     boolean authenticate(SecurityAuthorizeUserRequest request);
 
-    UsernamePasswordAuthenticationToken getAuthenticationUser(SecurityAuthorizeUserResponse response);
+    UsernamePasswordAuthenticationToken getAuthenticationToken(SecurityAuthorizeUserResponse response);
 }

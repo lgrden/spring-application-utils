@@ -1,10 +1,15 @@
 package io.wegetit.sau.security;
 
 import io.wegetit.sau.shared.configuration.BaseConfiguration;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.validation.annotation.Validated;
 
 import java.lang.annotation.*;
 
@@ -14,9 +19,18 @@ import java.lang.annotation.*;
 @Import(EnableTokenSecurity.EnableTokenSecurityConfiguration.class)
 public @interface EnableTokenSecurity {
 
-    @Slf4j
     @Configuration
+    @EnableWebSecurity
+    @EnableGlobalMethodSecurity(prePostEnabled = true)
     class EnableTokenSecurityConfiguration extends BaseConfiguration {
+
+        @Primary
+        @Bean
+        @Validated
+        @ConfigurationProperties(prefix = "security")
+        public SecurityProperties securityProperties() {
+            return new SecurityProperties();
+        }
 
         @Bean
         public SecurityAuthenticationProvider securityAuthenticationProvider() {
@@ -24,23 +38,19 @@ public @interface EnableTokenSecurity {
         }
 
         @Bean
-        public SecurityAuthenticationService securityAuthenticationService(SecurityTokenFacade securityTokenFacade) {
-            return new SecurityAuthenticationService(securityTokenFacade);
+        public SecurityAuthenticationService securityAuthenticationService(SecurityTokenFacade facade) {
+            return new SecurityAuthenticationService(facade);
         }
 
         @Bean
-        public SecurityAuthenticationRestService securityAuthenticationRestService(SecurityAuthenticationService securityAuthenticationService) {
-            return new SecurityAuthenticationRestService(securityAuthenticationService);
+        public SecurityAuthenticationRestService securityAuthenticationRestService(SecurityAuthenticationService service) {
+            return new SecurityAuthenticationRestService(service);
         }
 
         @Bean
-        public SecurityConfig securityConfig() {
-            return new SecurityConfig();
-        }
-
-        @Bean
-        public SecurityFilter securityFilter(SecurityAuthenticationService securityAuthenticationService) {
-            return new SecurityFilter(securityAuthenticationService);
+        public SecurityWebService SecurityWebService(SecurityAuthenticationProvider provider,
+                 SecurityAuthenticationService service, SecurityProperties securityProperties) {
+            return new SecurityWebService(provider, service, securityProperties);
         }
     }
 }

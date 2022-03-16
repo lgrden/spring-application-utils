@@ -1,0 +1,10 @@
+security:
+  web-ignoring-ant-matchers:
+    - /
+    - /actuator/**
+    - /security/**
+    - /error-types
+    - /system-info
+    - /swagger-ui.html
+    - /swagger-ui/**
+    - /v3/api-docs/**

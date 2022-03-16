@@ -26,10 +26,15 @@ public class TokenSecurityApplication {
             }
 
             @Override
-            public UsernamePasswordAuthenticationToken getAuthenticationUser(SecurityAuthorizeUserResponse response) {
+            public UsernamePasswordAuthenticationToken getAuthenticationToken(SecurityAuthorizeUserResponse response) {
                 return new UsernamePasswordAuthenticationToken(response.getLogin(), response.getLogin());
             }
         };
+    }
+
+    @Bean
+    public SecuredTestService securedTestService() {
+        return new SecuredTestService();
     }
 
     public static void main(String[] args) {

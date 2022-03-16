@@ -3,3 +3,10 @@ spring:
     banner-mode: off
   application:
     name: spring-application-utils-security
+
+security:
+  auth-token-name: xxx
+  web-ignoring-ant-matchers:
+    - a
+    - b
+    - c

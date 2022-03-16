@@ -62,7 +62,7 @@ public class SecurityAuthenticationService {
         SecurityAuthorizeUserResponse response = TOKENS.get(token);
         if (response != null) {
             TOKENS.put(token, response.toBuilder().expires(LocalDateTime.now().plusSeconds(DEFAULT_EXPIRES)).build());
-            return securityTokenFacade.getAuthenticationUser(response);
+            return securityTokenFacade.getAuthenticationToken(response);
         }
         return null;
     }
