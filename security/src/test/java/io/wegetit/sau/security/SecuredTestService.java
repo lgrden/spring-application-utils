@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SecuredTestService {
 
-    @PreAuthorize("#userLogin == authentication.principal")
+    @PreAuthorize("'userLogin' == authentication.principal")
     public String test() {
         return "ok";
     }
