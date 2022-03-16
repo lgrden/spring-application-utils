@@ -6,7 +6,7 @@
 
 	<groupId>io.wegetit</groupId>
 	<artifactId>spring-application-utils</artifactId>
-	<version>0.1.13</version>
+	<version>0.1.14</version>
 	<packaging>pom</packaging>
 	<name>spring-application-utils</name>
 	<description>Spring Application Utils</description>
