@@ -1,10 +1,14 @@
 package io.wegetit.sau.security;
 
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+import javax.validation.constraints.Min;
+
+@Data
 public class InMemorySecurityTokenProperties {
-    private int expiresInSeconds = 600;
-    private int initialDelay = 1000;
-    private int fixedDelay = 1000;
+    private Integer expiresInSeconds = 600;
+    @Min(1000)
+    private Integer initialDelay = 1000;
+    @Min(0)
+    private Integer fixedDelay = 1000;
 }

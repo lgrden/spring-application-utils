@@ -1,10 +1,10 @@
 package io.wegetit.sau.core.system.data;
 
-import lombok.Getter;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
-@Getter
+@Data
 public class SystemBuild {
     @NotNull
     private String version;
