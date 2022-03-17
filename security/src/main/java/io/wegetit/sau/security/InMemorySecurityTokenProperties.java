@@ -1,8 +1,8 @@
 package io.wegetit.sau.security;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class InMemorySecurityTokenProperties {
     private int expiresInSeconds = 600;
     private int initialDelay = 1000;
