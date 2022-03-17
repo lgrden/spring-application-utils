@@ -32,7 +32,7 @@ public class SlackMessagingTest {
 
     @Test
     public void sendMessage() throws URISyntaxException, JsonProcessingException {
-        MockRestServiceServer mockServer = MockRestServiceServer.createServer(service.SLACK_REST_TEMPLATE);
+        MockRestServiceServer mockServer = MockRestServiceServer.createServer(SlackMessageService.SLACK_REST_TEMPLATE);
 
         SlackMessage message = SlackMessage.builder()
             .text("This is a slack test message")
@@ -48,7 +48,7 @@ public class SlackMessagingTest {
                 .andExpect(method(HttpMethod.POST))
                 .andRespond(withStatus(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(service.SLACK_OBJECT_MAPPER.writeValueAsString(message))
+                .body(SlackMessageService.SLACK_OBJECT_MAPPER.writeValueAsString(message))
             );
         service.send("This is a slack test message", SlackAttachment.of("Welcome Test", "red"));
         mockServer.verify();
