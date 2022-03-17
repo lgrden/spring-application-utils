@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @AllArgsConstructor
 public class InMemorySecurityTokenFacade implements SecurityTokenFacade {
 
-    private static final ConcurrentHashMap<String, TokenDetails> TOKENS = new ConcurrentHashMap();
+    private static final ConcurrentHashMap<String, TokenDetails> TOKENS = new ConcurrentHashMap<>();
 
     private final InMemorySecurityTokenProperties properties;
 
@@ -20,7 +20,7 @@ public class InMemorySecurityTokenFacade implements SecurityTokenFacade {
     @Scheduled(initialDelayString = "#{@inMemorySecurityTokenProperties.initialDelay}",
             fixedDelayString = "#{@inMemorySecurityTokenProperties.fixedDelay}")
     private void tokenExpired() {
-        TOKENS.values().stream().forEach(p -> {
+        TOKENS.values().forEach(p -> {
             LocalDateTime now = LocalDateTime.now();
             if (now.isAfter(p.getExpires())) {
                 log.info("Token {} for user {} has expired.", p.getToken(), p.getLogin());

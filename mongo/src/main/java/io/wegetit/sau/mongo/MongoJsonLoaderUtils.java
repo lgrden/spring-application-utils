@@ -37,9 +37,7 @@ public class MongoJsonLoaderUtils {
         ObjectMapper objectMapper = new ObjectMapper();
         List<T> data = objectMapper.readValue(resource.getURL(), objectMapper.getTypeFactory().constructCollectionType(List.class, type));
         if (converters != null) {
-            data.forEach(p -> {
-                Arrays.asList(converters).forEach(c -> c.accept(p));
-            });
+            data.forEach(p -> Arrays.asList(converters).forEach(c -> c.accept(p)));
         }
         repository.saveAll(data);
         long end = System.currentTimeMillis();

@@ -16,7 +16,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -36,7 +36,7 @@ public class SlackMessagingTest {
 
         SlackMessage message = SlackMessage.builder()
             .text("This is a slack test message")
-            .attachments(Arrays.asList(SlackAttachment.of("Welcome Test", "red")))
+            .attachments(List.of(SlackAttachment.of("Welcome Test", "red")))
             .channel("test-channel")
             .username("test-username")
             .iconEmoji(":robot_face:")

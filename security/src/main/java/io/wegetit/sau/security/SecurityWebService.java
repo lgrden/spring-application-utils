@@ -61,9 +61,7 @@ public class SecurityWebService extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         log.info("Web ignoring ant matchers = {}", properties.getWebIgnoringAntMatchers());
 
-        properties.getWebIgnoringAntMatchers().forEach(p -> {
-            web.ignoring().antMatchers(p);
-        });
+        properties.getWebIgnoringAntMatchers().forEach(p -> web.ignoring().antMatchers(p));
 
         DefaultHttpFirewall firewall = new DefaultHttpFirewall();
         firewall.setAllowUrlEncodedSlash(true);

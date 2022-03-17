@@ -18,5 +18,5 @@ class SlackMessage {
     @JsonProperty("icon_emoji")
     private String iconEmoji;
     private String text;
-    private List<SlackAttachment> attachments = List.of();
+    private List<SlackAttachment> attachments;
 }

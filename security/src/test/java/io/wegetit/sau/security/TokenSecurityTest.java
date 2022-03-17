@@ -35,6 +35,7 @@ public class TokenSecurityTest {
         SecurityAuthorizeRequest request = SecurityAuthorizeRequest.builder().login(login).password(password).build();
         ResponseEntity<SecurityAuthorizeResponse> authResponse = template.postForEntity("/security/authorize", request, SecurityAuthorizeResponse.class);
         assertEquals(HttpStatus.OK, authResponse.getStatusCode());
+        assertNotNull(authResponse.getBody());
         assertEquals(login, authResponse.getBody().getLogin());
         assertNotNull(authResponse.getBody().getToken());
         assertNotNull(authResponse.getBody().getExpires());
