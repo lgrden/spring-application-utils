@@ -15,3 +15,6 @@ security:
     - /v3/api-docs/**
   in-memory-token:
     enabled: true
+    token-expires-in-seconds: 60
+    initial-delay-in-milliseconds: 0
+    fixed-delay-in-milliseconds: 2000

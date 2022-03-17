@@ -6,9 +6,10 @@ import javax.validation.constraints.Min;
 
 @Data
 public class InMemorySecurityTokenProperties {
-    private Integer expiresInSeconds = 600;
-    @Min(1000)
-    private Integer initialDelay = 1000;
+    @Min(60)
+    private Integer tokenExpires = 5 * 60;
     @Min(0)
+    private Integer initialDelay = 1000;
+    @Min(1000)
     private Integer fixedDelay = 1000;
 }

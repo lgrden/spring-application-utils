@@ -34,7 +34,7 @@ public class InMemorySecurityTokenFacade implements SecurityTokenFacade {
         String token = UUID.randomUUID().toString();
         TokenDetails details = TokenDetails.builder()
                 .login(login).token(token)
-                .expires(LocalDateTime.now().plusSeconds(properties.getExpiresInSeconds()))
+                .expires(LocalDateTime.now().plusSeconds(properties.getTokenExpires()))
                 .build();
         TOKENS.put(token, details);
         return details;
@@ -49,7 +49,7 @@ public class InMemorySecurityTokenFacade implements SecurityTokenFacade {
     public TokenDetails extend(String token) {
         TokenDetails details = TOKENS.get(token);
         if (details != null) {
-            details = details.toBuilder().expires(LocalDateTime.now().plusSeconds(properties.getExpiresInSeconds())).build();
+            details = details.toBuilder().expires(LocalDateTime.now().plusSeconds(properties.getTokenExpires())).build();
             TOKENS.put(token, details);
             return details;
         }
