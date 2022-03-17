@@ -29,11 +29,6 @@ public class TokenSecurityApplication {
     }
 
     @Bean
-    public InMemorySecurityTokenFacade securityTokenFacade() {
-        return new InMemorySecurityTokenFacade();
-    }
-
-    @Bean
     public TestRestService securedTestService() {
         return new TestRestService();
     }

@@ -13,3 +13,5 @@ security:
     - /swagger-ui.html
     - /swagger-ui/**
     - /v3/api-docs/**
+  in-memory-token:
+    enabled: true

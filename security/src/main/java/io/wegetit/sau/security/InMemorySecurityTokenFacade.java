@@ -1,5 +1,6 @@
 package io.wegetit.sau.security;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -8,12 +9,16 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
+@AllArgsConstructor
 public class InMemorySecurityTokenFacade implements SecurityTokenFacade {
 
-    private static final int DEFAULT_EXPIRES = 600;
     private static final ConcurrentHashMap<String, TokenDetails> TOKENS = new ConcurrentHashMap();
 
+    private final InMemorySecurityTokenProperties properties;
+
     @Scheduled(fixedDelay = 1000, initialDelay = 1000)
+    @Scheduled(initialDelayString = "#{@inMemorySecurityTokenProperties.initialDelay}",
+            fixedDelayString = "#{@inMemorySecurityTokenProperties.fixedDelay}")
     private void tokenExpired() {
         TOKENS.values().stream().forEach(p -> {
             LocalDateTime now = LocalDateTime.now();
@@ -29,7 +34,7 @@ public class InMemorySecurityTokenFacade implements SecurityTokenFacade {
         String token = UUID.randomUUID().toString();
         TokenDetails details = TokenDetails.builder()
                 .login(login).token(token)
-                .expires(LocalDateTime.now().plusSeconds(DEFAULT_EXPIRES))
+                .expires(LocalDateTime.now().plusSeconds(properties.getExpires()))
                 .build();
         TOKENS.put(token, details);
         return details;
@@ -44,7 +49,7 @@ public class InMemorySecurityTokenFacade implements SecurityTokenFacade {
     public TokenDetails extend(String token) {
         TokenDetails details = TOKENS.get(token);
         if (details != null) {
-            details = details.toBuilder().expires(LocalDateTime.now().plusSeconds(DEFAULT_EXPIRES)).build();
+            details = details.toBuilder().expires(LocalDateTime.now().plusSeconds(properties.getExpires())).build();
             TOKENS.put(token, details);
             return details;
         }

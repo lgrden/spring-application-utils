@@ -1,11 +1,11 @@
 package io.wegetit.sau.security;
 
 import io.wegetit.sau.shared.configuration.BaseConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.validation.annotation.Validated;
@@ -23,7 +23,6 @@ public @interface EnableTokenSecurity {
     @EnableGlobalMethodSecurity(prePostEnabled = true)
     class EnableTokenSecurityConfiguration extends BaseConfiguration {
 
-        @Primary
         @Bean
         @Validated
         @ConfigurationProperties(prefix = "security")
@@ -51,6 +50,20 @@ public @interface EnableTokenSecurity {
         public SecurityWebService SecurityWebService(SecurityAuthenticationProvider provider,
                  SecurityAuthenticationService service, SecurityProperties securityProperties) {
             return new SecurityWebService(provider, service, securityProperties);
+        }
+
+        @Bean
+        @Validated
+        @ConfigurationProperties(prefix = "security")
+        @ConditionalOnProperty(prefix = "security.in-memory-token", name = "enabled", havingValue = "true")
+        public InMemorySecurityTokenProperties inMemorySecurityTokenProperties() {
+            return new InMemorySecurityTokenProperties();
+        }
+
+        @Bean
+        @ConditionalOnProperty(prefix = "security.in-memory-token", name = "enabled", havingValue = "true")
+        public InMemorySecurityTokenFacade securityTokenFacade(InMemorySecurityTokenProperties properties) {
+            return new InMemorySecurityTokenFacade(properties);
         }
     }
 }
