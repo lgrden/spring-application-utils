@@ -15,8 +15,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 public class TokenSecurityApplication {
 
     @Bean
-    public SecurityTokenFacade securityTokenFacade() {
-        return new SecurityTokenFacade() {
+    public SecurityAuthenticationFacade securityTokenFacade() {
+        return new SecurityAuthenticationFacade() {
             @Override
             public boolean authenticate(SecurityAuthorizeRequest request) {
                 return (StringUtils.equals("login1", request.getLogin()) || StringUtils.equals("login2", request.getLogin()))

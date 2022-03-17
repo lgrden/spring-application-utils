@@ -22,7 +22,7 @@ public class SecurityAuthenticationService {
     private static final int DEFAULT_EXPIRES = 600;
     private static final ConcurrentHashMap<String, SecurityAuthorizeResponse> TOKENS = new ConcurrentHashMap();
 
-    private final SecurityTokenFacade securityTokenFacade;
+    private final SecurityAuthenticationFacade securityAuthenticationFacade;
 
     @Scheduled(fixedDelay = 100, initialDelay = 100)
     private void tokenExpired() {
@@ -36,7 +36,7 @@ public class SecurityAuthenticationService {
     }
 
     public SecurityAuthorizeResponse authorize(@Valid @RequestBody SecurityAuthorizeRequest request) {
-        if (securityTokenFacade.authenticate(request)) {
+        if (securityAuthenticationFacade.authenticate(request)) {
             String token = UUID.randomUUID().toString();
             log.info("Token {} for user {} has created.", token, request.getLogin());
             TOKENS.put(token, SecurityAuthorizeResponse.builder()
@@ -62,7 +62,7 @@ public class SecurityAuthenticationService {
         SecurityAuthorizeResponse response = TOKENS.get(token);
         if (response != null) {
             TOKENS.put(token, response.toBuilder().expires(LocalDateTime.now().plusSeconds(DEFAULT_EXPIRES)).build());
-            return securityTokenFacade.getAuthenticationToken(response);
+            return securityAuthenticationFacade.getAuthenticationToken(response);
         }
         return null;
     }

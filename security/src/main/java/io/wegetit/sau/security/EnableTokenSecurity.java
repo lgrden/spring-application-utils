@@ -1,7 +1,6 @@
 package io.wegetit.sau.security;
 
 import io.wegetit.sau.shared.configuration.BaseConfiguration;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,7 +37,7 @@ public @interface EnableTokenSecurity {
         }
 
         @Bean
-        public SecurityAuthenticationService securityAuthenticationService(SecurityTokenFacade facade) {
+        public SecurityAuthenticationService securityAuthenticationService(SecurityAuthenticationFacade facade) {
             return new SecurityAuthenticationService(facade);
         }
 
