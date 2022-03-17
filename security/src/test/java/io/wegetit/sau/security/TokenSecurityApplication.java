@@ -1,7 +1,5 @@
 package io.wegetit.sau.security;
 
-import io.wegetit.sau.security.model.SecurityAuthorizeRequest;
-import io.wegetit.sau.security.model.SecurityAuthorizeResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,25 +13,31 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 public class TokenSecurityApplication {
 
     @Bean
-    public SecurityAuthenticationFacade securityTokenFacade() {
+    public SecurityAuthenticationFacade securityAuthenticationFacade() {
         return new SecurityAuthenticationFacade() {
             @Override
-            public boolean authenticate(SecurityAuthorizeRequest request) {
-                return (StringUtils.equals("login1", request.getLogin()) || StringUtils.equals("login2", request.getLogin()))
-                    && StringUtils.equals("password", request.getPassword());
+            public boolean authenticate(String login, String password) {
+                return (StringUtils.equals("login1", login) || StringUtils.equals("login2", login))
+                    && StringUtils.equals("password", password);
             }
 
             @Override
-            public UsernamePasswordAuthenticationToken getAuthenticationToken(SecurityAuthorizeResponse response) {
-                return new UsernamePasswordAuthenticationToken(response.getLogin(), response.getLogin());
+            public UsernamePasswordAuthenticationToken getAuthenticationToken(SecurityTokenFacade.TokenDetails td) {
+                return new UsernamePasswordAuthenticationToken(td.getLogin(), td.getLogin());
             }
         };
+    }
+
+    @Bean
+    public InMemorySecurityTokenFacade securityTokenFacade() {
+        return new InMemorySecurityTokenFacade();
     }
 
     @Bean
     public TestRestService securedTestService() {
         return new TestRestService();
     }
+
 
     public static void main(String[] args) {
         SpringApplication.run(TokenSecurityApplication.class, args);

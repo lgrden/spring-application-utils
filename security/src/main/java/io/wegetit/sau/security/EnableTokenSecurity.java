@@ -37,8 +37,9 @@ public @interface EnableTokenSecurity {
         }
 
         @Bean
-        public SecurityAuthenticationService securityAuthenticationService(SecurityAuthenticationFacade facade) {
-            return new SecurityAuthenticationService(facade);
+        public SecurityAuthenticationService securityAuthenticationService(SecurityAuthenticationFacade authenticationFacade,
+                                                                           SecurityTokenFacade tokenFacade) {
+            return new SecurityAuthenticationService(authenticationFacade, tokenFacade);
         }
 
         @Bean
