@@ -50,9 +50,7 @@ public class ValidatorTest {
 
     @Test
     public void validateAndThrow() {
-        ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, () -> {
-            validatorService.validateAndThrow(new User());
-        });
+        ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, () -> validatorService.validateAndThrow(new User()));
         assertThat(exception.getConstraintViolations(), hasSize(1));
         ConstraintViolation<?> cv = exception.getConstraintViolations().stream().findAny().orElseThrow();
         assertEquals("name", cv.getPropertyPath().toString());

@@ -1,6 +1,8 @@
 package io.wegetit.sau.core.validator;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 @Getter
 @AllArgsConstructor

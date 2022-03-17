@@ -6,7 +6,7 @@
 
 	<groupId>io.wegetit</groupId>
 	<artifactId>spring-application-utils</artifactId>
-	<version>0.1.13</version>
+	<version>0.1.14</version>
 	<packaging>pom</packaging>
 	<name>spring-application-utils</name>
 	<description>Spring Application Utils</description>
@@ -23,6 +23,7 @@
 		<module>shared</module>
 		<module>core</module>
 		<module>mongo</module>
+		<module>security</module>
 		<module>swagger</module>
 		<module>dependencies</module>
 	</modules>

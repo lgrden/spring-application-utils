@@ -40,7 +40,7 @@ public @interface EnableMongoBaseSetup {
 
         @Bean
         public MongoCustomConversions mongoCustomConversions() {
-            List<Converter> converters = new ArrayList<>();
+            List<Converter<?, ?>> converters = new ArrayList<>();
             converters.add(new LocalDateConverter.LocalDateFromDateConverter());
             converters.add(new LocalDateConverter.LocalDateToDateConverter());
             converters.add(new LocalDateTimeConverter.LocalDateTimeFromDateConverter());

@@ -1,12 +1,10 @@
 package io.wegetit.sau.core.slack;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 
-@Getter
-@Setter
+@Data
 public class SlackHook {
     private boolean enabled = true;
     @NotEmpty

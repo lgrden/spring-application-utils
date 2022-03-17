@@ -109,7 +109,7 @@ public class MySpringBootApplication {
 }
 ```
 properties file:
-```java
+```properties
 slack.test.type=test
 slack.test.enabled=true
 slack.test.hook=https://hooks.slack.com/services/Test

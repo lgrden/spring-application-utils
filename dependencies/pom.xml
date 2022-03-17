@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.wegetit</groupId>
 		<artifactId>spring-application-utils</artifactId>
-		<version>0.1.13</version>
+		<version>0.1.14</version>
 	</parent>
 
 	<name>spring-application-utils-dependencies</name>
@@ -23,6 +23,11 @@
 			<dependency>
 				<groupId>io.wegetit</groupId>
 				<artifactId>spring-application-utils-mongo</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.wegetit</groupId>
+				<artifactId>spring-application-utils-security</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

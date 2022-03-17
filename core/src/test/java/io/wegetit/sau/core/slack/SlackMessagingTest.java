@@ -16,7 +16,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -32,11 +32,11 @@ public class SlackMessagingTest {
 
     @Test
     public void sendMessage() throws URISyntaxException, JsonProcessingException {
-        MockRestServiceServer mockServer = MockRestServiceServer.createServer(service.SLACK_REST_TEMPLATE);
+        MockRestServiceServer mockServer = MockRestServiceServer.createServer(SlackMessageService.SLACK_REST_TEMPLATE);
 
         SlackMessage message = SlackMessage.builder()
             .text("This is a slack test message")
-            .attachments(Arrays.asList(SlackAttachment.of("Welcome Test", "red")))
+            .attachments(List.of(SlackAttachment.of("Welcome Test", "red")))
             .channel("test-channel")
             .username("test-username")
             .iconEmoji(":robot_face:")
@@ -48,7 +48,7 @@ public class SlackMessagingTest {
                 .andExpect(method(HttpMethod.POST))
                 .andRespond(withStatus(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(service.SLACK_OBJECT_MAPPER.writeValueAsString(message))
+                .body(SlackMessageService.SLACK_OBJECT_MAPPER.writeValueAsString(message))
             );
         service.send("This is a slack test message", SlackAttachment.of("Welcome Test", "red"));
         mockServer.verify();

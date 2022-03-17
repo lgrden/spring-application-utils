@@ -31,10 +31,7 @@ public class ErrorHandlerService {
 
     private final Map<Class<? extends Throwable>, ExceptionType> types = new HashMap<>();
 
-    private final ObjectMapper objectMapper;
-
     public ErrorHandlerService(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
         // global framework exceptions
         registerType(ExceptionType.builder().errorClass(ClientAbortException.class).status(HttpStatus.BAD_REQUEST).build());
         registerType(ExceptionType.builder().errorClass(SizeLimitExceededException.class).status(HttpStatus.BAD_REQUEST).build());

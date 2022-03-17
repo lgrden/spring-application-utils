@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/error-types")
 @RestController
 @AllArgsConstructor
+@RequestMapping("/error-types")
 public class ErrorHandlerRestService {
     private final ErrorHandlerService service;
 
