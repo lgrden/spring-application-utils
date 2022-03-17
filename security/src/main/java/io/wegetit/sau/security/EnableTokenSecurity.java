@@ -54,7 +54,7 @@ public @interface EnableTokenSecurity {
 
         @Bean
         @Validated
-        @ConfigurationProperties(prefix = "security")
+        @ConfigurationProperties(prefix = "security.in-memory-token")
         @ConditionalOnProperty(prefix = "security.in-memory-token", name = "enabled", havingValue = "true")
         public InMemorySecurityTokenProperties inMemorySecurityTokenProperties() {
             return new InMemorySecurityTokenProperties();
