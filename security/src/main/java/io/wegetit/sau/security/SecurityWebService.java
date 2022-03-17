@@ -27,7 +27,6 @@ public class SecurityWebService extends WebSecurityConfigurerAdapter {
     private final SecurityProperties properties;
 
     private static class SecurityFilter implements Filter {
-        public static final String AUTH_TOKEN = "auth_token";
 
         private final SecurityAuthenticationService authenticationService;
         private final SecurityProperties properties;
@@ -44,9 +43,9 @@ public class SecurityWebService extends WebSecurityConfigurerAdapter {
 
             HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-            String token = request.getParameter(AUTH_TOKEN);
+            String token = request.getParameter(properties.getAuthTokenName());
             if (StringUtils.isEmpty(token)) {
-                token = httpRequest.getHeader(AUTH_TOKEN);
+                token = httpRequest.getHeader(properties.getAuthTokenName());
             }
 
             if (StringUtils.isNotEmpty(token)) {
