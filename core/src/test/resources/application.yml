@@ -8,6 +8,11 @@ server:
   address: localhost
   port: 8080
 
+messages:
+  default-locale: en
+  base-names:
+    - msg/test1
+
 test:
   system:
     build:

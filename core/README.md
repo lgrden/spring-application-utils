@@ -3,8 +3,10 @@
 ## Introduction
 Following are core module utilities and tools:
 - [@EnableErrorHandler](#@EnableErrorHandler)
-- [@EnableExecutionLogger](#@EnableExecutionLogger)
-- [@EnableHttpRequestLogger](#@EnableHttpRequestLogger)
+- Logger
+  - [@EnableExecutionLogger](#@EnableExecutionLogger)
+  - [@EnableHttpRequestLogger](#@EnableHttpRequestLogger)
+- [@EnableMessageResolver](#@EnableMessageResolver)
 - [@EnableSlackMessaging](#@EnableSlackMessaging)
 - [@EnableSystemInfo](#@EnableSystemInfo)
 - [@EnableValidation](#@EnableValidation)
@@ -84,6 +86,27 @@ public class MySpringBootApplication {
         SpringApplication.run(MySpringBootApplication.class, args);
     }
 }
+```
+
+## @EnableMessageResolver
+Enabling message resolver using ResourceBundleMessageSource. 
+
+Code sample:
+```java
+@SpringBootApplication
+@EnableMessageResolver
+public class MySpringBootApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MySpringBootApplication.class, args);
+    }
+}
+```
+properties file:
+```properties
+messages.default-locale= en
+messages.base-names[0]= msg1/test1
+messages.base-names[1]= msg1/test2
 ```
 
 ## @EnableSlackMessaging
