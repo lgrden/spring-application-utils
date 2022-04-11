@@ -20,7 +20,7 @@ Dependency management in pom.xml
       <dependency>
         <groupId>io.wegetit</groupId>
         <artifactId>spring-application-utils-dependencies</artifactId>
-        <version>0.1.14</version>
+        <version>0.1.15</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

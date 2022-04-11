@@ -17,6 +17,11 @@
 		<dependencies>
 			<dependency>
 				<groupId>io.wegetit</groupId>
+				<artifactId>spring-application-utils-shared</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.wegetit</groupId>
 				<artifactId>spring-application-utils-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
