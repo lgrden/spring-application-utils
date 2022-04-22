@@ -1,11 +1,13 @@
 package io.wegetit.sau.security;
 
 import io.wegetit.sau.shared.configuration.BaseConfiguration;
+import io.wegetit.sau.shared.properties.YamlPropertySourceFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +21,7 @@ import java.lang.annotation.*;
 public @interface EnableTokenSecurity {
 
     @Configuration
+    @PropertySource(value = "classpath:sau-security-application.yml", factory = YamlPropertySourceFactory.class)
     @EnableWebSecurity
     @EnableGlobalMethodSecurity(prePostEnabled = true)
     class EnableTokenSecurityConfiguration extends BaseConfiguration {
