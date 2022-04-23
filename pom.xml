@@ -23,6 +23,7 @@
 		<module>shared</module>
 		<module>core</module>
 		<module>mongo</module>
+		<module>monitoring</module>
 		<module>security</module>
 		<module>swagger</module>
 		<module>dependencies</module>

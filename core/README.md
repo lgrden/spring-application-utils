@@ -2,6 +2,7 @@
 
 ## Introduction
 Following are core module utilities and tools:
+- [@DisableCors](#@DisableCors)
 - [@EnableErrorHandler](#@EnableErrorHandler)
 - Logger
   - [@EnableExecutionLogger](#@EnableExecutionLogger)
@@ -10,6 +11,21 @@ Following are core module utilities and tools:
 - [@EnableSlackMessaging](#@EnableSlackMessaging)
 - [@EnableSystemInfo](#@EnableSystemInfo)
 - [@EnableValidation](#@EnableValidation)
+
+## @DisableCors
+Disables CORS.
+
+Code sample:
+```java
+@SpringBootApplication
+@DisableCors
+public class MySpringBootApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MySpringBootApplication.class, args);
+    }
+}
+```
 
 ## @EnableErrorHandler
 Creates global error handler and exposes details via rest '/error-types'.
