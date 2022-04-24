@@ -1,12 +1,10 @@
 package io.wegetit.sau.mongo;
 
 import io.wegetit.sau.shared.configuration.BaseConfiguration;
+import io.wegetit.sau.shared.properties.YamlPropertySourceFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.*;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.convert.converter.Converter;
@@ -31,6 +29,7 @@ import java.util.List;
 public @interface EnableMongoBaseSetup {
 
     @Slf4j
+    @PropertySource(value = "classpath:sau-monitoring-application.yml", factory = YamlPropertySourceFactory.class)
     @Configuration
     class MongoBaseSetupConfiguration extends BaseConfiguration {
 
