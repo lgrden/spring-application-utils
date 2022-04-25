@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 @RequestMapping("/assets/config")
 public class AssetsEndpointRestService {
 
-    @Value("${spring.profiles.active:#null}")
+    @Value("${spring.profiles.active:#{null}}")
     private String profile;
 
     private String content;
