@@ -14,13 +14,6 @@ messages:
     - msg/test1
 
 test:
-  system:
-    build:
-      version: 1.0.0
-      buildDate: today
-      gitCommit: ABCD
-      gitTimeStamp: 2022-01-01 12:34:27
-      gitBranch: main
   slack:
     hook:
       type: test
