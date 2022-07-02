@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.function.Function;
 
@@ -15,6 +16,7 @@ public class ExceptionType {
     private Class<? extends Throwable> errorClass;
     private HttpStatus status;
     private Function<Throwable, String> evalMessage;
+    private Function<Throwable, ResponseEntity<ErrorResponse>> handler;
     private boolean logTrace;
 
     public String getCode() {

@@ -3,6 +3,7 @@ package io.wegetit.sau.core.errorhandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.ClientAbortException;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.apache.tomcat.util.http.fileupload.impl.SizeLimitExceededException;
 import org.springframework.http.HttpStatus;
@@ -93,19 +94,27 @@ public class ErrorHandlerService {
         Throwable handlerException = findException(throwable);
         ExceptionType type = findExceptionType(handlerException).orElse(DEFAULT);
         String message = handlerException != null ? type.evaluateMessage(handlerException) : type.evaluateMessage(throwable);
-        String logMessage = "[" + type.getStatus().value() + "]" + type.getStatus().getReasonPhrase() + ": " + message;
+        HttpStatus status = ObjectUtils.defaultIfNull(type.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
+        String logMessage = "[" + status.value() + "]" + status.getReasonPhrase() + ": " + message;
         if (type.isLogTrace()) {
             log.error(logMessage, throwable);
         } else {
             log.error(logMessage);
         }
+        if (type.getHandler() != null) {
+            try {
+                return type.getHandler().apply(throwable);
+            } catch (Exception e) {
+                log.error("Problem applying handler for {}. Fallback to default handler.", handlerException.getClass(), throwable);
+            }
+        }
         return new ResponseEntity<>(ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
-                .status(type.getStatus().value())
-                .statusText(type.getStatus())
+                .status(status.value())
+                .statusText(status)
                 .code(type.getCode())
                 .message(message)
                 .path(request.getContextPath() + request.getServletPath())
-                .build(), type.getStatus());
+                .build(), status);
     }
 }
