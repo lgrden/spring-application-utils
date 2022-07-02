@@ -102,10 +102,14 @@ public class ErrorHandlerService {
             log.error(logMessage);
         }
         if (type.getHandler() != null) {
+            ResponseEntity<ErrorResponse> response = null;
             try {
-                return type.getHandler().apply(throwable);
+                response = type.getHandler().apply(throwable);
             } catch (Exception e) {
                 log.error("Problem applying handler for {}. Fallback to default handler.", handlerException.getClass(), throwable);
+            }
+            if (response != null) {
+                return response;
             }
         }
         return new ResponseEntity<>(ErrorResponse.builder()
