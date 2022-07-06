@@ -11,6 +11,6 @@ public class ChangeLog {
 
     @ChangeSet(order = "001", id = "loadUsers", author = "grlu", runAlways = true)
     public void loadCurrencies(UserEntityRepository repository) throws IOException {
-        MongoJsonLoaderUtils.loadAllIfEmpty(repository, "users.json", UserEntity.class);
+        MongoDataLoaderUtils.loadAllFromJsonIfEmpty(repository, "users.json", UserEntity.class);
     }
 }
