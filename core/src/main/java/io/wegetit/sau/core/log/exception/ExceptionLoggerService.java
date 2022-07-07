@@ -18,7 +18,7 @@ public class ExceptionLoggerService {
             result = joinPoint.proceed();
         } catch (Throwable t) {
             String methodSignature = joinPoint.getTarget().getClass().getSimpleName() + "." + ((MethodSignature) joinPoint.getSignature()).getMethod().getName();
-            log.info("{} executed with error: {}.", methodSignature, ExceptionUtils.convertToLineTrace(t));
+            log.warn("{} executed with error: {}.", methodSignature, ExceptionUtils.convertToLineTrace(t));
         }
         return result;
     }
