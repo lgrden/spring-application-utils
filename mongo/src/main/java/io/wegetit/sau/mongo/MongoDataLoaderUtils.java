@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -19,11 +20,21 @@ public class MongoDataLoaderUtils {
     private MongoDataLoaderUtils() {
     }
 
+    public static <T, K> void load(MongoRepository<T, K> repository, Class<T> type, Supplier<List<T>> supplier, Consumer<T>... converters) {
+        long start = System.currentTimeMillis();
+        List<T> data = supplier.get();
+        applyConverters(data, converters);
+        repository.saveAll(data);
+        long end = System.currentTimeMillis();
+        log.info("Loaded {} with {} elements in {} ms.", type.getSimpleName(), data.size(), (end - start));
+    }
+
     public static <T, K> void loadFromJsonIfMissing(MongoRepository<T, K> repository, String file, Class<T> type, Consumer<T>... converters) throws IOException {
         long start = System.currentTimeMillis();
         List<T> found = repository.findAll();
         List<T> data = readFromJson(file, type, converters);
         data = data.stream().filter(d -> !found.contains(d)).collect(Collectors.toList());
+        applyConverters(data, converters);
         repository.saveAll(data);
         long end = System.currentTimeMillis();
         log.info("Loaded {} with {} elements in {} ms.", type.getSimpleName(), data.size(), (end - start));
@@ -41,22 +52,25 @@ public class MongoDataLoaderUtils {
     public static <T, K> void loadAllFromJson(MongoRepository<T, K> repository, String file, Class<T> type, Consumer<T>... converters) throws IOException {
         long start = System.currentTimeMillis();
         List<T> data = readFromJson(file, type, converters);
+        applyConverters(data, converters);
         repository.saveAll(data);
         long end = System.currentTimeMillis();
         log.info("Loaded {} with {} elements in {} ms.", type.getSimpleName(), data.size(), (end - start));
     }
 
-    public static <T> List<T> readFromJson(String file, Class<T> type, Consumer<T>... converters) throws IOException {
+    private static <T> List<T> readFromJson(String file, Class<T> type, Consumer<T>... converters) throws IOException {
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         Resource resource = resolver.getResource("/changelogs/" + file);
         if (!resource.exists()) {
             throw new IllegalStateException(file + " not found in changelogs.");
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        List<T> data = objectMapper.readValue(resource.getURL(), objectMapper.getTypeFactory().constructCollectionType(List.class, type));
+        return objectMapper.readValue(resource.getURL(), objectMapper.getTypeFactory().constructCollectionType(List.class, type));
+    }
+
+    private static <T> void applyConverters(List<T> data, Consumer<T>... converters) {
         if (converters != null) {
             data.forEach(p -> Arrays.asList(converters).forEach(c -> c.accept(p)));
         }
-        return data;
     }
 }
