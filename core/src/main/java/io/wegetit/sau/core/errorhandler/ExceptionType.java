@@ -3,6 +3,7 @@ package io.wegetit.sau.core.errorhandler;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,7 @@ public class ExceptionType {
     }
 
     public ExceptionTypeInfo toInfo() {
-        return ExceptionTypeInfo.builder().status(getStatus().value()).statusText(getStatus()).code(getCode()).build();
+        HttpStatus status = ObjectUtils.defaultIfNull(getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return ExceptionTypeInfo.builder().status(status.value()).statusText(status).code(getCode()).build();
     }
 }
