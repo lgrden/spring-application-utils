@@ -12,6 +12,6 @@ public class ChangeLog {
 
     @ChangeSet(order = "001", id = "loadUsers", author = "grlu", runAlways = true)
     public void loadCurrencies(UserEntityRepository repository) throws IOException {
-        CrudRepositoryDataLoaderUtils.loadAllFromJsonIfEmpty(repository, "users.json", UserEntity.class);
+        CrudRepositoryDataLoaderUtils.loadAllFromJsonIfEmpty(repository, "/data/users.json", UserEntity.class);
     }
 }

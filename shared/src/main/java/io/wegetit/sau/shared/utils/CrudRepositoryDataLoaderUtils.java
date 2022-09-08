@@ -26,10 +26,10 @@ public class CrudRepositoryDataLoaderUtils {
         log.info("Loaded {} with {} elements in {} ms.", type.getSimpleName(), data.size(), (end - start));
     }
 
-    public static <T, K> void loadFromJsonIfMissing(CrudRepository<T, K> repository, String file, Class<T> type, Consumer<T>... converters) throws IOException {
+    public static <T, K> void loadFromJsonIfMissing(CrudRepository<T, K> repository, String location, Class<T> type, Consumer<T>... converters) throws IOException {
         long start = System.currentTimeMillis();
         List<T> found = StreamSupport.stream(repository.findAll().spliterator(), false).collect(Collectors.toList());
-        List<T> data = JsonDataReader.read("/changelogs/" + file, type);
+        List<T> data = JsonDataReader.read(location, type);
         data = data.stream().filter(d -> !found.contains(d)).collect(Collectors.toList());
         JsonDataReader.apply(data, converters);
         repository.saveAll(data);
@@ -37,18 +37,18 @@ public class CrudRepositoryDataLoaderUtils {
         log.info("Loaded {} with {} elements in {} ms.", type.getSimpleName(), data.size(), (end - start));
     }
 
-    public static <T, K> void loadAllFromJsonIfEmpty(CrudRepository<T, K> repository, String file, Class<T> type, Consumer<T>... converters) throws IOException {
+    public static <T, K> void loadAllFromJsonIfEmpty(CrudRepository<T, K> repository, String location, Class<T> type, Consumer<T>... converters) throws IOException {
         long count = repository.count();
         if (count == 0) {
-            loadAllFromJson(repository, file, type, converters);
+            loadAllFromJson(repository, location, type, converters);
         } else {
             log.info("Skipped loading {} as it contains {} elements", type.getSimpleName(), count);
         }
     }
 
-    public static <T, K> void loadAllFromJson(CrudRepository<T, K> repository, String file, Class<T> type, Consumer<T>... converters) throws IOException {
+    public static <T, K> void loadAllFromJson(CrudRepository<T, K> repository, String location, Class<T> type, Consumer<T>... converters) throws IOException {
         long start = System.currentTimeMillis();
-        List<T> data = JsonDataReader.readAndApply("/changelogs/" + file, type, converters);
+        List<T> data = JsonDataReader.readAndApply(location, type, converters);
         repository.saveAll(data);
         long end = System.currentTimeMillis();
         log.info("Loaded {} with {} elements in {} ms.", type.getSimpleName(), data.size(), (end - start));
