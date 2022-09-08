@@ -3,6 +3,7 @@ package io.wegetit.sau.mongo;
 import com.github.cloudyrock.mongock.ChangeSet;
 import io.wegetit.sau.mongo.user.UserEntity;
 import io.wegetit.sau.mongo.user.UserEntityRepository;
+import io.wegetit.sau.shared.utils.CrudRepositoryDataLoaderUtils;
 
 import java.io.IOException;
 
@@ -11,6 +12,6 @@ public class ChangeLog {
 
     @ChangeSet(order = "001", id = "loadUsers", author = "grlu", runAlways = true)
     public void loadCurrencies(UserEntityRepository repository) throws IOException {
-        MongoDataLoaderUtils.loadAllFromJsonIfEmpty(repository, "users.json", UserEntity.class);
+        CrudRepositoryDataLoaderUtils.loadAllFromJsonIfEmpty(repository, "users.json", UserEntity.class);
     }
 }
