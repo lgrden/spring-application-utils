@@ -95,14 +95,16 @@ public class ErrorHandlerService {
         ExceptionType type = findExceptionType(handlerException).orElse(DEFAULT);
 
         if (type.getHandler() != null) {
-            ResponseEntity<ErrorResponse> response;
+            ResponseEntity<ErrorResponse> response = null;
             try {
                 response = type.getHandler().apply(throwable);
+            } catch (Exception e) {
+                log.error("Problem applying handler for {}. Fallback to default handler.", handlerException.getClass(), throwable);
+            }
+            if (response != null) {
                 ErrorResponse errorResponse = response.getBody();
                 log(errorResponse.getStatusText(), errorResponse.getMessage(), false, null);
                 return response;
-            } catch (Exception e) {
-                log.error("Problem applying handler for {}. Fallback to default handler.", handlerException.getClass(), throwable);
             }
         }
 
