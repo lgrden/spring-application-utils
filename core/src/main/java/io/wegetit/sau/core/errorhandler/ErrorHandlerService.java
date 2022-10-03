@@ -93,24 +93,22 @@ public class ErrorHandlerService {
     public ResponseEntity<ErrorResponse> handle(Throwable throwable, HttpServletRequest request) {
         Throwable handlerException = findException(throwable);
         ExceptionType type = findExceptionType(handlerException).orElse(DEFAULT);
-        String message = handlerException != null ? type.evaluateMessage(handlerException) : type.evaluateMessage(throwable);
-        HttpStatus status = ObjectUtils.defaultIfNull(type.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
 
         if (type.getHandler() != null) {
-            ResponseEntity<ErrorResponse> response = null;
+            ResponseEntity<ErrorResponse> response;
             try {
                 response = type.getHandler().apply(throwable);
+                ErrorResponse errorResponse = response.getBody();
+                log(errorResponse.getStatusText(), errorResponse.getMessage(), false, null);
+                return response;
             } catch (Exception e) {
                 log.error("Problem applying handler for {}. Fallback to default handler.", handlerException.getClass(), throwable);
             }
-            if (response != null) {
-                log(response.getBody().getStatusText(), response.getBody().getMessage(), false, null);
-                return response;
-            }
         }
 
+        String message = handlerException != null ? type.evaluateMessage(handlerException) : type.evaluateMessage(throwable);
+        HttpStatus status = ObjectUtils.defaultIfNull(type.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
         log(status, message, type.isLogTrace(), throwable);
-
         return new ResponseEntity<>(ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(status.value())
