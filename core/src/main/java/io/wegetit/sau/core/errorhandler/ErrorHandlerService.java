@@ -95,12 +95,7 @@ public class ErrorHandlerService {
         ExceptionType type = findExceptionType(handlerException).orElse(DEFAULT);
         String message = handlerException != null ? type.evaluateMessage(handlerException) : type.evaluateMessage(throwable);
         HttpStatus status = ObjectUtils.defaultIfNull(type.getStatus(), HttpStatus.INTERNAL_SERVER_ERROR);
-        String logMessage = "[" + status.value() + "]" + status.getReasonPhrase() + ": " + message;
-        if (type.isLogTrace()) {
-            log.error(logMessage, throwable);
-        } else {
-            log.error(logMessage);
-        }
+
         if (type.getHandler() != null) {
             ResponseEntity<ErrorResponse> response = null;
             try {
@@ -109,9 +104,13 @@ public class ErrorHandlerService {
                 log.error("Problem applying handler for {}. Fallback to default handler.", handlerException.getClass(), throwable);
             }
             if (response != null) {
+                log(response.getBody().getStatusText(), response.getBody().getMessage(), false, null);
                 return response;
             }
         }
+
+        log(status, message, type.isLogTrace(), throwable);
+
         return new ResponseEntity<>(ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(status.value())
@@ -120,5 +119,14 @@ public class ErrorHandlerService {
                 .message(message)
                 .path(request.getContextPath() + request.getServletPath())
                 .build(), status);
+    }
+
+    private void log(HttpStatus status, String message, boolean logTrace, Throwable throwable) {
+        String logMessage = "[" + status.value() + "]" + status.getReasonPhrase() + ": " + message;
+        if (logTrace) {
+            log.error(logMessage, throwable);
+        } else {
+            log.error(logMessage);
+        }
     }
 }
