@@ -1,6 +1,6 @@
 package io.wegetit.sau.core.validator.constraints;
 
-import io.wegetit.sau.core.utils.CronUtils;
+import org.springframework.scheduling.support.CronExpression;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -16,6 +16,11 @@ public class CronValidator implements ConstraintValidator<Cron, String> {
 
     @Override
     public boolean isValid(String contactField, ConstraintValidatorContext cxt) {
-        return CronUtils.isValid(contactField);
+        try {
+            CronExpression.parse(contactField);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 }
