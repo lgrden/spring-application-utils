@@ -71,8 +71,8 @@ public class DefaultRowMapper<T> implements RowMapper<T> {
         if (rs.getObject(idx) == null) {
             return null;
         }
-        if (type.isEnum() && IdEnum.class.isAssignableFrom(type)) {
-            return IdEnum.fromId((Class<? extends IdEnum>) type, rs.getString(idx));
+        if (type.isEnum() && IdentifiedEnum.class.isAssignableFrom(type)) {
+            return IdentifiedEnumUtils.findById((Class<? extends IdentifiedEnum>) type, rs.getString(idx));
         }
         if (type.isEnum()) {
             return Enum.valueOf((Class<Enum>) type, rs.getString(idx));
